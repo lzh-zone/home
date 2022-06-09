@@ -16,11 +16,8 @@
 
 >静态图
 
-![主页JPG](./assets/img/home.jpg)
+![主页JPG](https://cdn.jsdelivr.net/gh/lzh-zone/picture/img/屏幕截图 2022-06-09 113838.png)
 
->动态图
-
-![主页GIF](./assets/img/home.gif)
 
 ### 注
 
