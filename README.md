@@ -16,7 +16,7 @@
 
 >静态图
 
-![主页JPG](https://cdn.jsdelivr.net/gh/lzh-zone/picture/img/屏幕截图 2022-06-09 113838.png)
+![主页JPG](https://github.com/lzh-zone/home/blob/main/assets/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-06-09%20113838.png)
 
 
 ### 注
