@@ -1,54 +1,43 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LZH-TG-GR图床</title>
-
-    <script src="https://lib.baomitu.com/jquery/3.4.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <title>电报图床 - 电报图像托管，免费和无限的图像托管</title>
+  <meta name="description" content="基于 Telegraph 免费和无限的图像托管">
+  <link rel="shortcut icon" href="//wsrv.nl/?url=telegra.ph/file/50fee15aa10cfacf2fd76.png" type="image/x-icon" />  
+    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f8f9fa;
-        }
-        .background {
-        background-image: url('https://cdn.jsdelivr.net/gh/lzh-zone/pic@main/img/zXHY3nC2V7vguRT.png');
-        background-size: cover;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        z-index: -1;
-        filter: blur(10px);
-         opacity: 0.8;
+            background:#f6f8fa url(//wsrv.nl/?url=telegra.ph/file/b748d085303e38901fbee.png) top;
         }
 
         .container {
             max-width: 600px;
-            margin: 120px auto;
-            padding: 60px;
-            background-color: #fff;
+            margin: 35px auto;
+            padding: 20px;
             border-radius: 10px;
-            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+      background-color: rgba(246,248,250,0.5);
         }
 
         .upload-btn-wrapper {
             position: relative;
+            justify-content: center;
+            align-items: center;
             overflow: hidden;
-            display: block;
-            background-color: #C7EDCC;
-            color: #808080;
+            display: flex;
+            background-color: #007BFF;
+            color: #FFF;
             border-radius: 5px;
-            padding: 10px 25px;
+            padding: 10px;
             cursor: pointer;
             transition: background-color 0.3s;
-            
         }
 
         .upload-btn-wrapper:hover {
-            background-color: #FFF2E2;
+            background-color: #0056b3;
         }
 
         .upload-btn-wrapper input[type=file] {
@@ -58,30 +47,48 @@
             top: 0;
             opacity: 0;
         }
+
+        .custom-input-group-append {
+            position: relative;
+            overflow: hidden;
+            display: flex;
+        }
+
+        .alert {
+            position: fixed;
+            z-index: 9999;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0.6;
+            padding: 10px;
+        }
+
+        .alert.alert-warning {
+            color: #fff;
+            background-color: #333333;
+            border: 1px solid #ddd;
+            border-radius: 2px;
+        }
     </style>
 </head>
 <body>
-
-    <div class="background"></div>
     <div class="container">
-        <h2 class="text-center">LZH-TG-GR图床</h2>
-        <p class="text-center text-muted">永久免费无限制存储网盘</p>
+        <h2 class="text-center">电报图像托管</h2>
+        <p class="text-center text-muted" style="color:red;">免费和无限的图像托管</p>
+        <p class="text-center text-muted" style="color:#A569BD;">立即开始上传您的图片,上传图片限制 5M 以内</p>
         <hr>
 
         <div class="upload-btn-wrapper text-center">
-            <span>上传文件</span>
+            <span>选择图片</span>
             <input type="file" name="file" id="fileInput" accept="image/png, image/jpeg, image/jpg, image/gif">
         </div>
 
         <div id="uploadStatus" style="margin-top: 20px;"></div>
 
         <hr>
-        <p class="text-center">感谢由<a href="https://telegra.ph">Telegraph</a> & <a href="https://cloudflare.com">Cloudflare</a>的大力支持</p>
-        <p class="text-center">另鸣谢 <a href="https://missuo.ru">大佬</a>反代服务</p>
-        <p class="text-center">2021-2024 / Powered By <a href="https://010702.xyz/">Sterling</a> / <a href="https://h.889168.xyz/pic.html">Free Online</a></p>
+        <p align="center">© <script>document.write(new Date().getFullYear())</script> <a href="https://img.yunloc.com" target="_Blank">Yunloc</a> Image. Author <a href="https://t.me/missuo" target="_Blank">Vincent</a>, <a href="https://www.yunloc.com/1738.html" target="_Blank">[ Install Help ]</a></p>
     </div>
-   
-
 
     <script>
         const fileInput = document.getElementById('fileInput');
@@ -98,36 +105,71 @@
             const formData = new FormData();
             formData.append('file', file);
 
-            fetch('https://img.110.nl.eu.org/upload', {
+            uploadStatus.innerHTML = '<div class="alert alert-info"><i class="glyphicon glyphicon-upload"></i> 上传中，请稍候...</div>';
+
+            fetch('//missuo.ru/upload', {
                 method: 'POST',
                 body: formData
             })
             .then(response => response.json())
             .then(data => {
-                const src = 'https://img.110.nl.eu.org' + data[0].src;
+                const src = 'https://missuo.ru' + data[0].src;
+                const src1 = 'https://images.weserv.nl/?url=telegra.ph' + data[0].src;
+                const src2 = 'https://i3.wp.com/telegra.ph' + data[0].src;
                 uploadStatus.innerHTML = `
-                    <div class="alert alert-success">Upload successful!</div>
-                    <img src="${src}" class="img-fluid mb-3" alt="Uploaded Image">
+                    <div class="alert alert-success"><i class="glyphicon glyphicon-ok"></i> 上传成功!</div>
+                    <div class="text-center">
+                        <img src="${src}" class="img-fluid mb-3" alt="Uploaded Image" style="max-width: 100%;">
+                    </div>
                     <div class="input-group">
-                      <input type="text" class="form-control" id="imageUrl" value="${src}">
-                      <div class="input-group-append">
-                        <button class="btn btn-outline-secondary" type="button" onclick="copyImageUrl()">Copy URL</button>
-                      </div>
+                        <input type="text" class="form-control" style="margin-top: 20px;" id="imageUrl" value="${src}">
+                        <div class="custom-input-group-append" style="margin-top: 60px;">
+                            <a href="${src}" target="_blank"><button type="button" class="btn btn-primary">在新标签中打开</button></a>
+                            <button class="btn btn-primary" type="button" onclick="copyImageUrl('imageUrl')" style="margin-left: 5px;">复制网址</button>
+                        </div>
+                    </div>          
+                    <div class="input-group">
+                        <input type="text" class="form-control" style="margin-top: 20px;" id="imageUrl1" value="${src1}">
+                        <div class="custom-input-group-append" style="margin-top: 60px;">
+                            <a href="${src1}" target="_blank"><button type="button" class="btn btn-primary">在新标签中打开</button></a>
+                            <button class="btn btn-primary" type="button" onclick="copyImageUrl('imageUrl1')" style="margin-left: 5px;">复制网址</button>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <input type="text" class="form-control" style="margin-top: 20px;" id="imageUrl2" value="${src2}">
+                        <div class="custom-input-group-append" style="margin-top: 60px;">
+                            <a href="${src2}" target="_blank"><button type="button" class="btn btn-primary">在新标签中打开</button></a>
+                            <button class="btn btn-primary" type="button" onclick="copyImageUrl('imageUrl2')" style="margin-left: 5px;">复制网址</button>
+                        </div>
                     </div>
                 `;
+                setTimeout(function() {
+                    const successAlert = document.querySelector('.alert-success');
+                    successAlert.style.display = 'none';
+                }, 5000);
             })
             .catch(error => {
-                uploadStatus.innerHTML = '<div class="alert alert-danger">Upload failed. Please try again.</div>';
+                uploadStatus.innerHTML = '<div class="alert alert-danger"><i class="glyphicon glyphicon-remove"></i> 上传失败! 请再试一次...</div>';
             });
         }
 
-        function copyImageUrl() {
-            const imageUrl = document.getElementById('imageUrl');
-            imageUrl.select();
-            document.execCommand('copy');
-            alert('URL Copied to Clipboard!');
+        function copyImageUrl(imageUrlId) {
+            const imageUrl = document.getElementById(imageUrlId).value;
+            navigator.clipboard.writeText(imageUrl)
+                .then(function() {
+                    const alertBox = document.createElement('div');
+                    alertBox.className = 'alert alert-warning';
+                    alertBox.innerHTML = '<i class="glyphicon glyphicon-info-sign"></i> 已复制到剪贴板！';
+                    document.body.appendChild(alertBox);
+
+                    setTimeout(function() {
+                        alertBox.remove();
+                    }, 2000);
+                })
+                .catch(function(error) {
+                    console.error('复制失败:', error);
+                });
         }
     </script>
-    <script id="music" src="https://music.xingyaox.com/xmusic/f656f1eeb0ae43038cf0680212a31d2c" m="1"></script>
 </body>
 </html>
